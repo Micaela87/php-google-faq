@@ -36,8 +36,15 @@
             "title" => "Why is my account associated with a country?",
             "paragraphs" => ["Your account is associated with a country (or territory) in the Terms of Service so that we can determine two things:"],
             "lists" => [
-                "bulletPoint_1" => ["The Google affiliate that provides the services, that processes your information, and that is responsible for complying with applicable privacy laws. Generally, Google offers its consumer services through either of two companies:"],
-                "bulletPoint_2" => ["The version of the terms that govern our relationship, which can vary depending on local laws"]
+                [
+                    "The Google affiliate that provides the services, that processes your information, and that is responsible for complying with applicable privacy laws. Generally, Google offers its consumer services through either of two companies:",
+
+                    "sub_list" => [
+                        "Google Ireland Limited, if you’re located in the European Economic Area (EU countries plus Iceland, Liechtenstein, and Norway) or Switzerland",
+                        "Google LLC, based in the United States, for the rest of the world"
+                    ]
+                ],
+                ["The version of the terms that govern our relationship, which can vary depending on local laws"]
             ],
             "sub_section" => [
                 "title" => "Determining the country associated with your account",
@@ -98,9 +105,28 @@
 
                     $bulletPoints = $section['lists'];
 
-                    echo "<ul>";
+                    echo "<ol>";
 
-                    echo "</ul>";
+                    foreach($bulletPoints as $bulletPoint) {
+
+                        // handles possible sublists
+                        if ($bulletPoint['sub_list']) {
+
+                            $sublists = $bulletPoint['sub_list'];
+
+                            echo "<li>{$bulletPoint[0]}<ul>";
+
+                            foreach($sublists as $sublist) {
+                                echo "<li>{$sublist}</li>";
+                            }
+                            echo "</ul></li>";
+                        } else {
+                            // var_dump($bulletPoint);
+                            echo "<li>{$bulletPoint[0]}</li>";
+                        }
+                    }
+
+                    echo "</ol>";
                 }
 
                 // handles possible subsections
