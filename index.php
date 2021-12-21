@@ -35,14 +35,9 @@
         [
             "title" => "Why is my account associated with a country?",
             "paragraphs" => ["Your account is associated with a country (or territory) in the Terms of Service so that we can determine two things:"],
-            "list" => [
-
-                "The Google affiliate that provides the services, that processes your information, and that is responsible for complying with applicable privacy laws. Generally, Google offers its consumer services through either of two companies:",
-
-                "sublist" => [
-                    "Google Ireland Limited, if you’re located in the European Economic Area (EU countries plus Iceland, Liechtenstein, and Norway) or Switzerland", "Google LLC, based in the United States, for the rest of the world"
-                ],
-                "The version of the terms that govern our relationship, which can vary depending on local laws"
+            "lists" => [
+                "bulletPoint_1" => ["The Google affiliate that provides the services, that processes your information, and that is responsible for complying with applicable privacy laws. Generally, Google offers its consumer services through either of two companies:"],
+                "bulletPoint_2" => ["The version of the terms that govern our relationship, which can vary depending on local laws"]
             ],
             "sub_section" => [
                 "title" => "Determining the country associated with your account",
@@ -86,7 +81,7 @@
     <main>
         <?php 
             foreach($db as $section) {
-                
+                // generates a standard section
                 echo "<section>";
 
                 $main_title = $section['title'];
@@ -96,6 +91,30 @@
 
                 foreach($paragraphs as $paragraph) {
                     echo "<p>{$paragraph}</p>";
+                }
+
+                // handles possible lists
+                if ($section['lists']) {
+
+                    $bulletPoints = $section['lists'];
+
+                    echo "<ul>";
+
+                    echo "</ul>";
+                }
+
+                // handles possible subsections
+                if ($section['sub_section']) {
+                    $subsections = $section['sub_section'];
+
+                    $title = $subsections['title'];
+                    $content = $subsections['paragraphs'];
+
+                    echo "<h3>{$title}</h3>";
+
+                    foreach($content as $paragraph) {
+                        echo "<p>{$paragraph}</p>";
+                    }
                 }
 
                 echo "</section>";
