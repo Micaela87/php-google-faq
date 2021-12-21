@@ -10,6 +10,8 @@
 
 body {
     font-family: 'Roboto', sans-serif;
+    font-size: 1.5rem;
+    line-height: 1.6;
 }
 
 main {
@@ -22,8 +24,23 @@ h2 {
     padding-top: 1rem;
 }
 
+h3 {
+    font-size: 2rem;
+    padding: 1rem 0;
+}
+
 p {
-    font-size: 1.5rem;
-    line-height: 1.6;
     padding: 1.5rem 0;
+}
+
+ol, ul {
+    margin: 0 1.7rem;
+}
+
+ol li, ul li {
+    padding: 0.5rem 0.5rem;
+}
+
+.sublists {
+    list-style-type: lower-latin;
 }

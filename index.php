@@ -34,17 +34,20 @@
         ],
         [
             "title" => "Why is my account associated with a country?",
-            "paragraphs" => ["Your account is associated with a country (or territory) in the Terms of Service so that we can determine two things:"],
+            "paragraphs" => [
+                "Your account is associated with a country (or territory) in the Terms of Service so that we can determine two things:"
+            ],
             "lists" => [
-                [
-                    "The Google affiliate that provides the services, that processes your information, and that is responsible for complying with applicable privacy laws. Generally, Google offers its consumer services through either of two companies:",
 
-                    "sub_list" => [
-                        "Google Ireland Limited, if you’re located in the European Economic Area (EU countries plus Iceland, Liechtenstein, and Norway) or Switzerland",
-                        "Google LLC, based in the United States, for the rest of the world"
-                    ]
-                ],
-                ["The version of the terms that govern our relationship, which can vary depending on local laws"]
+                "The Google affiliate that provides the services, that processes your information, and that is responsible for complying with applicable privacy laws. Generally, Google offers its consumer services through either of two companies:",
+
+                "The version of the terms that govern our relationship, which can vary depending on local laws"
+            ],
+            "sub_lists" => [
+                "bulletPoint_0" => [
+                    "Google Ireland Limited, if you’re located in the European Economic Area (EU countries plus Iceland, Liechtenstein, and Norway) or Switzerland",
+                    "Google LLC, based in the United States, for the rest of the world"
+                ]
             ],
             "sub_section" => [
                 "title" => "Determining the country associated with your account",
@@ -107,22 +110,26 @@
 
                     echo "<ol>";
 
-                    foreach($bulletPoints as $bulletPoint) {
+                    for($i = 0; $i < count($bulletPoints); $i++) {
 
-                        // handles possible sublists
-                        if ($bulletPoint['sub_list']) {
+                        /*
+                        each child list collection key contains a number whitch is the same as the parent element index in its collection
+                        looping through parent collection with for (or setting a counter in foreach) allows perfect matching between
+                        parent list element and child list collection
+                        */
 
-                            $sublists = $bulletPoint['sub_list'];
+                        if ($section['sub_lists']["bulletPoint_{$i}"]) {
 
-                            echo "<li>{$bulletPoint[0]}<ul>";
+                            $sublists = $section['sub_lists']["bulletPoint_{$i}"];
+
+                            echo "<li>{$bulletPoints[$i]}<ul class='sublists'>";
 
                             foreach($sublists as $sublist) {
                                 echo "<li>{$sublist}</li>";
                             }
                             echo "</ul></li>";
                         } else {
-                            // var_dump($bulletPoint);
-                            echo "<li>{$bulletPoint[0]}</li>";
+                            echo "<li>{$bulletPoints[$i]}</li>";
                         }
                     }
 
